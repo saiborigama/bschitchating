@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website</title>
+  <link rel="stylesheet" href="web.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to <span id="dynamicWebsiteName"></span></h1>
+    <div class="form-group">
+      <label for="inputPassword">Enter Password:</label>
+      <input type="password" id="inputPassword" placeholder="Enter password">
+    </div>
+    <button onclick="validatePassword()">Submit</button>
+  </div>
+
+  <!-- Fullscreen div that turns blue upon successful password entry -->
+  <div id="blueScreen" class="blue-screen" style="display: none;"></div>
+
+  <script>
+    // Get the website name from the URL parameter and display it dynamically
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const websiteName = urlParams.get('name');
+    
+    document.getElementById('dynamicWebsiteName').textContent = websiteName;
+
+    function validatePassword() {
+      const enteredPassword = document.getElementById('inputPassword').value;
+      const savedPassword = localStorage.getItem('websitePassword');  // Retrieve saved password from localStorage
+
+      if (enteredPassword === savedPassword) {
+        document.getElementById('blueScreen').style.display = 'block'; // Show blue screen
+      } else {
+        alert("Incorrect password. Please try again.");
+      }
+    }
+  </script>
+</body>
+</html>

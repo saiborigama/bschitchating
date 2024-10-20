@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Relationship Website</title>
+  <link rel="stylesheet" href="Chitchattingstyle.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Create Your Website</h1>
+    
+    <div class="form-group">
+      <label for="websiteName">Website Name:</label>
+      <input type="text" id="websiteName" placeholder="Enter website name" oninput="updateMessage()">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password" oninput="updateMessage()">
+    </div>
+
+    <div class="form-group">
+      <label for="relationship">Choose a relationship:</label>
+      <select id="relationship" onchange="changeStyle()">
+        <option value="">--Select--</option>
+        <option value="friend">Friend</option>
+        <option value="lover">Lover</option>
+        <option value="group">Group Members</option>
+        <option value="business">Business</option>
+      </select>
+    </div>
+
+    <div id="message" class="message">Please enter the website name, password, and choose a relationship type.</div>
+    
+    <!-- Button to open the "created" website -->
+    <div id="websiteLink" class="website-link" style="display: none;">
+      <a id="websiteAnchor" href="#" onclick="savePasswordAndNavigate()">Visit Your Website</a>
+    </div>
+  </div>
+
+  <script src="Chitchattingvalidation.js"></script>
+</body>
+</html>
