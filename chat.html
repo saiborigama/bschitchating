@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Room</title>
+  <link rel="stylesheet" href="web.css">
+</head>
+<body>
+  <div id="chatContainer" class="chat-container">
+    <div class="chat-header">Chat Room</div>
+    <div class="chat-box" id="chatBox">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Chat functionality
+    function sendMessage() {
+      const chatBox = document.getElementById('chatBox');
+      const chatInput = document.getElementById('chatInput');
+      const message = chatInput.value.trim();
+
+      if (message !== "") {
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('chat-message');
+        newMessage.textContent = message;
+        chatBox.appendChild(newMessage);
+        chatInput.value = "";  // Clear input after sending
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+      }
+    }
+  </script>
+</body>
+</html>

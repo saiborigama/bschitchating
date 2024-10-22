@@ -13,11 +13,24 @@
       <label for="inputPassword">Enter Password:</label>
       <input type="password" id="inputPassword" placeholder="Enter password">
     </div>
-    <button onclick="validatePassword()">Submit</button>
+    
+    <a href="chat.html">clik</a>
   </div>
 
   <!-- Fullscreen div that turns blue upon successful password entry -->
-  <div id="blueScreen" class="blue-screen" style="display: none;"></div>
+  <div id="blueScreen" class="blue-screen" style="display: none;">Loading...</div>
+
+  <!-- Chat container, initially hidden, shown after correct password -->
+  <div id="chatContainer" class="chat-container" style="display: none;">
+    <div class="chat-header">Chat Room</div>
+    <div class="chat-box" id="chatBox">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 
   <script>
     // Get the website name from the URL parameter and display it dynamically
@@ -27,14 +40,35 @@
     
     document.getElementById('dynamicWebsiteName').textContent = websiteName;
 
+    // Validate the password
     function validatePassword() {
       const enteredPassword = document.getElementById('inputPassword').value;
       const savedPassword = localStorage.getItem('websitePassword');  // Retrieve saved password from localStorage
 
       if (enteredPassword === savedPassword) {
         document.getElementById('blueScreen').style.display = 'block'; // Show blue screen
+        setTimeout(() => {
+          document.getElementById('blueScreen').style.display = 'none'; // Hide blue screen
+          document.getElementById('chatContainer').style.display = 'block'; // Show chat
+        }, 1000); // Simulate a loading time of 2 seconds
       } else {
         alert("Incorrect password. Please try again.");
+      }
+    }
+
+    // Chat functionality
+    function sendMessage() {
+      const chatBox = document.getElementById('chatBox');
+      const chatInput = document.getElementById('chatInput');
+      const message = chatInput.value.trim();
+
+      if (message !== "") {
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('chat-message');
+        newMessage.textContent = message;
+        chatBox.appendChild(newMessage);
+        chatInput.value = "";  // Clear input after sending
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
       }
     }
   </script>
