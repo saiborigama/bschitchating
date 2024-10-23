@@ -3,33 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website</title>
+  <title>Website Login</title>
   <link rel="stylesheet" href="web.css">
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to <span id="dynamicWebsiteName"></span></h1>
+    <h1> <span id="dynamicWebsiteName"></span></h1>
     <div class="form-group">
       <label for="inputPassword">Enter Password:</label>
       <input type="password" id="inputPassword" placeholder="Enter password">
     </div>
-    
-    <a href="chat.html">clik</a>
-  </div>
-
-  <!-- Fullscreen div that turns blue upon successful password entry -->
-  <div id="blueScreen" class="blue-screen" style="display: none;">Loading...</div>
-
-  <!-- Chat container, initially hidden, shown after correct password -->
-  <div id="chatContainer" class="chat-container" style="display: none;">
-    <div class="chat-header">Chat Room</div>
-    <div class="chat-box" id="chatBox">
-      <!-- Chat messages will appear here -->
-    </div>
-    <div class="chat-input-area">
-      <input type="text" id="chatInput" placeholder="Type a message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
+    <button onclick="validatePassword()">Submit</button>
   </div>
 
   <script>
@@ -46,29 +30,10 @@
       const savedPassword = localStorage.getItem('websitePassword');  // Retrieve saved password from localStorage
 
       if (enteredPassword === savedPassword) {
-        document.getElementById('blueScreen').style.display = 'block'; // Show blue screen
-        setTimeout(() => {
-          document.getElementById('blueScreen').style.display = 'none'; // Hide blue screen
-          document.getElementById('chatContainer').style.display = 'block'; // Show chat
-        }, 1000); // Simulate a loading time of 2 seconds
+        // Redirect to chat.html and pass the website name in the URL
+        window.location.href = `chat.html?name=${websiteName}`;
       } else {
         alert("Incorrect password. Please try again.");
-      }
-    }
-
-    // Chat functionality
-    function sendMessage() {
-      const chatBox = document.getElementById('chatBox');
-      const chatInput = document.getElementById('chatInput');
-      const message = chatInput.value.trim();
-
-      if (message !== "") {
-        const newMessage = document.createElement('div');
-        newMessage.classList.add('chat-message');
-        newMessage.textContent = message;
-        chatBox.appendChild(newMessage);
-        chatInput.value = "";  // Clear input after sending
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
       }
     }
   </script>

@@ -7,7 +7,7 @@
   
   body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(to right, #0b0215, #eeebed);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,7 @@
   .website-link a {
     padding: 12px 25px;
     margin-top: 15px;
-    background-color: #ff6347;
+    background-color: #05a1ef;
     border: none;
     color: white;
     border-radius: 20px;
@@ -91,12 +91,12 @@
   
   button:hover,
   .website-link a:hover {
-    background-color: #e55340;
+    background-color: #d3eeee;
   }
   
   button:active,
   .website-link a:active {
-    background-color: #cc4b35;
+    background-color: #eacac4;
   }
   
   /* Message Box Styling */
@@ -110,11 +110,11 @@
   }
   
   .message.friend {
-    background-color: #00bfff;
+    background-color: #889ea5;
   }
   
   .message.lover {
-    background-color: #ff1493;
+    background-color: #bd8ba6;
   }
   
   .message.group {

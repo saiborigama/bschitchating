@@ -8,7 +8,8 @@
 </head>
 <body>
   <div id="chatContainer" class="chat-container">
-    <div class="chat-header">Chat Room</div>
+    <!-- Dynamic website name with attractive message -->
+    <div class="chat-header" id="chatHeader"></div>
     <div class="chat-box" id="chatBox">
       <!-- Chat messages will appear here -->
     </div>
@@ -19,6 +20,20 @@
   </div>
 
   <script>
+    // Retrieve website name from URL parameters
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let websiteName = urlParams.get('name');  // Get the 'name' parameter
+
+    // Remove 'bs.' and '.com' from the website name
+    websiteName = websiteName.replace('bs.', '').replace('.com', '');
+
+    // Add an attractive welcome message using the website name
+    const welcomeMessage = ` ${websiteName}! Let's chat and make memories.`;
+
+    // Display the dynamic website name and message in the header
+    document.getElementById('chatHeader').textContent = welcomeMessage;
+
     // Chat functionality
     function sendMessage() {
       const chatBox = document.getElementById('chatBox');
