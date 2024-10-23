@@ -4,15 +4,114 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat Room</title>
-  <link rel="stylesheet" href="web.css">
+  <style>
+    /* Styling the chat container */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fefeff;
+      color: #333;
+    }
+    .chat-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      border: 2px solid #090a0b;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #040303;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header with website name */
+    .chat-header {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f8f9fa;
+      margin-bottom: 20px;
+    }
+
+    /* Chat box styles */
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      padding: 10px;
+      background-color: #f7f3f3;
+    }
+
+    /* Individual message styling */
+    .chat-message {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #030303;
+      color: #f1e7e7;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Larger, attractive gift box */
+    .gift-box {
+      width: 250px;  /* More width for a bigger box */
+      height: 40px;  /* Taller height */
+      background-color: #032b47; /* Pink gift box color */
+      border: 2px solid #030202; /* Darker pink border */
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px; /* Bigger font size */
+      color: rgb(255, 252, 252);
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .gift-box:hover {
+      background-color: #474245; /* Darker color on hover */
+    }
+
+    /* Chat input area */
+    .chat-input-area {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Chat input field */
+    #chatInput {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #f9f5f5;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    /* Send button */
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <div id="chatContainer" class="chat-container">
     <!-- Dynamic website name with attractive message -->
     <div class="chat-header" id="chatHeader"></div>
-    <div class="chat-box" id="chatBox">
-      <!-- Chat messages will appear here -->
-    </div>
+
+    <!-- Chat box where messages will appear -->
+    <div class="chat-box" id="chatBox"></div>
+
+    <!-- Chat input area -->
     <div class="chat-input-area">
       <input type="text" id="chatInput" placeholder="Type a message...">
       <button onclick="sendMessage()">Send</button>
@@ -25,28 +124,46 @@
     const urlParams = new URLSearchParams(queryString);
     let websiteName = urlParams.get('name');  // Get the 'name' parameter
 
-    // Remove 'bs.' and '.com' from the website name
-    websiteName = websiteName.replace('bs.', '').replace('.com', '');
+    // Show the user-friendly website name by stripping 'bs.' and '.com' for display only
+    const coreWebsiteName = websiteName.replace('bs.', '').replace('.com', '');
 
-    // Add an attractive welcome message using the website name
-    const welcomeMessage = ` ${websiteName}! Let's chat and make memories.`;
+    // Add an attractive welcome message using the core website name
+    const welcomeMessage = ` ${coreWebsiteName}! Let's chat and make memories.`;
 
     // Display the dynamic website name and message in the header
     document.getElementById('chatHeader').textContent = welcomeMessage;
 
-    // Chat functionality
+    // Chat functionality to hide messages inside a gift box
     function sendMessage() {
       const chatBox = document.getElementById('chatBox');
       const chatInput = document.getElementById('chatInput');
       const message = chatInput.value.trim();
 
       if (message !== "") {
-        const newMessage = document.createElement('div');
-        newMessage.classList.add('chat-message');
-        newMessage.textContent = message;
-        chatBox.appendChild(newMessage);
-        chatInput.value = "";  // Clear input after sending
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        // Create a container for the gift box and hidden message
+        const messageContainer = document.createElement('div');
+
+        // Create the gift box
+        const giftBox = document.createElement('div');
+        giftBox.classList.add('gift-box');
+        giftBox.textContent = ' '; 
+
+        const hiddenMessage = document.createElement('div');
+        hiddenMessage.classList.add('chat-message');
+        hiddenMessage.textContent = message;
+        hiddenMessage.style.display = 'none'; 
+
+        giftBox.addEventListener('click', function() {
+          giftBox.style.display = 'none';  
+          hiddenMessage.style.display = 'block';  
+        });
+        messageContainer.appendChild(giftBox);
+        messageContainer.appendChild(hiddenMessage);
+
+        chatBox.appendChild(messageContainer);
+
+        chatInput.value = "";  
+        chatBox.scrollTop = chatBox.scrollHeight;
       }
     }
   </script>

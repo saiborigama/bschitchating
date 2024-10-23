@@ -105,8 +105,8 @@
     padding: 15px;
     font-size: 18px;
     border-radius: 12px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.4);
+    color: #faf8f8;
+    background: rgba(10, 8, 8, 0.4);
   }
   
   .message.friend {
@@ -122,11 +122,9 @@
   }
   
   .message.business {
-    background-color: #ffcc00;
+    background-color: #020e48;
     color: #333;
   }
-  
-  /* Website Link Styling */
   .website-link {
     display: flex;
     justify-content: center;
